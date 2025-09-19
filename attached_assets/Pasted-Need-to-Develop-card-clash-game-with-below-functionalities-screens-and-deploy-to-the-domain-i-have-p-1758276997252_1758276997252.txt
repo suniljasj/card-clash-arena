@@ -1,0 +1,114 @@
+Need to Develop card clash game with below functionalities/screens and deploy to the domain i have purchased - www.cardclasharena.com
+
+Core Screens You Must Include
+1. Onboarding & Access
+
+Sign Up / Sign In 
+
+Loading / Splash 
+
+Tutorial Screen(s) – guide new players through first match, explain mechanics.
+
+2. Main Hub
+
+Dashboard / Home
+
+Player avatar, level, currencies.
+
+Navigation to Battle Arena, Deck Builder, Card Collection, Store, Profile.
+
+3. Battle Flow
+
+Matchmaking Screen
+
+Searching for opponent, cancel button, fun animation.
+
+Battle Arena Screen
+
+Player vs Opponent HUD (health, mana, timer).
+
+Card hand (swipe to select).
+
+Playfield (summoned cards, attacks).
+
+End turn button.
+
+Victory / Defeat Screen
+
+Rewards (XP, gold, cards).
+
+Option to rematch or return home.
+
+4. Cards & Deck Management
+
+Card Collection Screen
+
+Grid view of all unlocked/locked cards.
+
+Filter by rarity, type (champion/spell/support).
+
+Card Detail Screen
+
+Enlarged card view, stats, ability, lore.
+
+Deck Builder Screen
+
+Select cards to form decks.
+
+Show deck size, mana curve, synergies.
+
+5. Store & Economy
+
+Store Screen
+
+Card packs (with rarity drop rates).
+
+Currency bundles (gold/gems).
+
+Limited-time offers.
+
+Currency Popup
+
+Buy more coins/gems with real money (if monetization included).
+
+6. Player Profile & Social
+
+Profile Screen
+
+Player stats, rank, achievements.
+
+Avatar customization.
+
+Friends / Guilds (Future)
+
+Add friends, join guilds, chat.
+
+7. System Screens
+
+Settings
+
+Audio, notifications, language, logout.
+
+Notifications / Inbox
+
+Daily rewards, event updates.
+
+Quests / Missions
+
+Daily/weekly challenges with rewards.
+
+🧭 Recommended User Journey
+
+Login → Dashboard
+
+Dashboard →
+
+Battle Arena → Matchmaking → Battle → Victory/Defeat → Rewards → Dashboard
+
+Deck Builder → Edit deck → Save → Dashboard
+
+Card Collection → View cards → Card detail → Dashboard
+
+Store → Buy packs/currency → Dashboard
+
+Profile → Settings / Achievements → Dashboard
