@@ -70,11 +70,8 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+  // Force production mode to serve built files since we have them
+  serveStatic(app);
 
   // Initialize WebSocket server
   const wsServer = new GameWebSocketServer(server);
