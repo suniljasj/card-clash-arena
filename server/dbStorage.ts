@@ -1,4 +1,4 @@
-import { eq, and } from "drizzle-orm";
+import { eq, and, or, desc } from "drizzle-orm";
 import { db } from "./db";
 import { 
   users, 
@@ -6,6 +6,11 @@ import {
   decks, 
   quests, 
   battles,
+  friendRequests,
+  friendships,
+  guilds,
+  guildMembers,
+  guildInvites,
   type User, 
   type InsertUser,
   type Player,
@@ -15,7 +20,17 @@ import {
   type Quest,
   type InsertQuest,
   type Battle,
-  type InsertBattle
+  type InsertBattle,
+  type FriendRequest,
+  type InsertFriendRequest,
+  type Friendship,
+  type InsertFriendship,
+  type Guild,
+  type InsertGuild,
+  type GuildMember,
+  type InsertGuildMember,
+  type GuildInvite,
+  type InsertGuildInvite
 } from "@shared/schema";
 import { IStorage } from "./storage";
 
