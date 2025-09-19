@@ -1,6 +1,8 @@
 import { CardComponent } from "../ui/card-component";
 import { Card } from "../../types/game";
 import { cn } from "../../lib/utils";
+import { triggerBattleEffect } from "./BattleEffects";
+import { useRef, useEffect } from "react";
 
 interface BattleFieldCard extends Card {
   instanceId: string;
@@ -63,30 +65,41 @@ export function BattleField({
               <div
                 key={card.instanceId}
                 className={cn(
-                  "relative transition-all duration-300",
-                  selectedCard && selectedCard.canAttack && "cursor-pointer hover:scale-105"
+                  "relative transition-all duration-300 battle-card",
+                  selectedCard && selectedCard.canAttack && "cursor-pointer hover:scale-105",
+                  card.currentHealth < (card.health || 0) && "damaged"
                 )}
                 onClick={() => handleCardClick(card, false)}
+                ref={(el) => {
+                  // Trigger damage effect when health decreases
+                  if (el && card.currentHealth < (card.health || 0)) {
+                    const damage = (card.health || 0) - card.currentHealth;
+                    setTimeout(() => triggerBattleEffect.damage(damage, el), 100);
+                  }
+                }}
               >
                 <CardComponent
                   card={card}
                   size="medium"
-                  className="border-red-400"
+                  className={cn(
+                    "border-red-400",
+                    card.canAttack && !card.hasAttackedThisTurn && "border-yellow-400 shadow-yellow-400/50"
+                  )}
                 />
                 
                 {/* Health/Attack Overlay */}
                 <div className="absolute -bottom-2 -right-2 flex gap-1">
-                  <div className="bg-red-600 text-white text-xs px-1 py-0.5 rounded">
+                  <div className="bg-red-600 text-white text-xs px-1 py-0.5 rounded font-bold">
                     {card.currentAttack}
                   </div>
-                  <div className="bg-green-600 text-white text-xs px-1 py-0.5 rounded">
+                  <div className="bg-green-600 text-white text-xs px-1 py-0.5 rounded font-bold">
                     {card.currentHealth}
                   </div>
                 </div>
 
-                {/* Damage Animation */}
-                {card.currentHealth < (card.health || 0) && (
-                  <div className="absolute inset-0 bg-red-500/30 rounded-lg animate-pulse" />
+                {/* Ready to Attack Indicator */}
+                {card.canAttack && !card.hasAttackedThisTurn && (
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
                 )}
               </div>
             ))
@@ -159,9 +172,9 @@ export function BattleField({
                     </div>
                   )}
 
-                  {/* Damage Animation */}
-                  {card.currentHealth < (card.health || 0) && (
-                    <div className="absolute inset-0 bg-red-500/30 rounded-lg animate-pulse" />
+                  {/* Ready to Attack Indicator */}
+                  {canSelect && (
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
                   )}
 
                   {/* Attack Ready Glow */}

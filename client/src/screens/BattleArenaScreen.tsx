@@ -5,6 +5,7 @@ import { useAudio } from "../lib/stores/useAudio";
 import { PlayerHUD } from "../components/game/PlayerHUD";
 import { CardHand } from "../components/game/CardHand";
 import { BattleField } from "../components/game/BattleField";
+import { BattleEffects } from "../components/game/BattleEffects";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { ScrollArea } from "../components/ui/scroll-area";
@@ -36,6 +37,7 @@ export default function BattleArenaScreen({ onNavigate }: BattleArenaScreenProps
   const { player: gamePlayer, addExperience, addGold, updatePlayer } = usePlayer();
   const { playHit, playSuccess, isMuted, toggleMute } = useAudio();
   const [showBattleLog, setShowBattleLog] = useState(false);
+  const [screenShake, setScreenShake] = useState(false);
 
   // Handle battle end
   useEffect(() => {
@@ -249,6 +251,12 @@ export default function BattleArenaScreen({ onNavigate }: BattleArenaScreenProps
         playerMana={battlePlayer.mana}
         isPlayerTurn={currentTurn === "player" && gamePhase === "playing"}
         className="flex-shrink-0"
+      />
+
+      {/* Battle Effects Layer */}
+      <BattleEffects 
+        screenShake={screenShake}
+        onScreenShakeEnd={() => setScreenShake(false)}
       />
     </div>
   );
