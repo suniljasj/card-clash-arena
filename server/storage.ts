@@ -292,10 +292,16 @@ export class MemStorage implements IStorage {
         packCards.push(randomCard);
         
         // Add to player collection
-        if (!player.ownedCards.includes(randomCard)) {
-          player.ownedCards.push(randomCard);
+        const ownedCards = (player.ownedCards as string[]) || [];
+        const cardCounts = (player.cardCounts as Record<string, number>) || {};
+        
+        if (!ownedCards.includes(randomCard)) {
+          ownedCards.push(randomCard);
         }
-        player.cardCounts[randomCard] = (player.cardCounts[randomCard] || 0) + 1;
+        cardCounts[randomCard] = (cardCounts[randomCard] || 0) + 1;
+        
+        player.ownedCards = ownedCards;
+        player.cardCounts = cardCounts;
       }
       
       result.cards = packCards;

@@ -49,7 +49,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Set session
-      (req.session as any).userId = user.id;
+      req.session.userId = user.id;
       
       res.json({ 
         user: { 
@@ -83,7 +83,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const user = await storage.createUser({ username, email, password });
       
       // Set session
-      (req.session as any).userId = user.id;
+      req.session.userId = user.id;
       
       res.json({ 
         user: { 
@@ -108,7 +108,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   app.get("/api/auth/me", async (req, res) => {
-    const userId = (req.session as any)?.userId;
+    const userId = req.session.userId;
     if (!userId) {
       return res.status(401).json({ message: "Not authenticated" });
     }
@@ -235,7 +235,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/quest/:questId/claim", async (req, res) => {
     try {
       const questId = req.params.questId;
-      const userId = (req.session as any)?.userId;
+      const userId = req.session.userId;
       
       if (!userId) {
         return res.status(401).json({ message: "Not authenticated" });
@@ -255,7 +255,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Battle routes
   app.post("/api/battle/start", async (req, res) => {
     try {
-      const userId = (req.session as any)?.userId;
+      const userId = req.session.userId;
       if (!userId) {
         return res.status(401).json({ message: "Not authenticated" });
       }
@@ -284,7 +284,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Store routes
   app.post("/api/store/purchase", async (req, res) => {
     try {
-      const userId = (req.session as any)?.userId;
+      const userId = req.session.userId;
       if (!userId) {
         return res.status(401).json({ message: "Not authenticated" });
       }
