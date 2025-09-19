@@ -8,6 +8,7 @@ import { usePlayer } from "../lib/stores/usePlayer";
 import { useBattle } from "../lib/stores/useBattle";
 import { useCards, getCardById } from "../lib/stores/useCards";
 import { CARDS } from "../data/cards";
+import type { Card as GameCard } from "@/types/game";
 import { GameScreen } from "../App";
 import { 
   Sword, 
@@ -88,7 +89,7 @@ export default function MatchmakingScreen({ onNavigate }: MatchmakingScreenProps
     // Get player's active deck or create a default one
     const activeDeck = getActiveDeck();
     let playerCards = activeDeck ? 
-      activeDeck.cardIds.map(id => getCardById(id)).filter(Boolean) : 
+      activeDeck.cardIds.map(id => getCardById(id)).filter(Boolean) as GameCard[] : 
       CARDS.slice(0, 10);
 
     // Create opponent deck (random cards)

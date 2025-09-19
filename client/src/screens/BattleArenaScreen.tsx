@@ -9,6 +9,7 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { ScrollArea } from "../components/ui/scroll-area";
 import { GameScreen } from "../App";
+import type { Card as GameCard, BattleCard } from "@/types/game";
 import { MessageSquare, Volume2, VolumeX } from "lucide-react";
 
 interface BattleArenaScreenProps {
@@ -241,9 +242,9 @@ export default function BattleArenaScreen({ onNavigate }: BattleArenaScreenProps
 
       {/* Player Hand */}
       <CardHand
-        cards={battlePlayer.hand}
-        selectedCard={selectedCard}
-        onCardSelect={selectCard}
+        cards={battlePlayer.hand as GameCard[]}
+        selectedCard={selectedCard as GameCard | null}
+        onCardSelect={(card: GameCard | null) => selectCard(card as BattleCard | null)}
         onCardPlay={handleCardPlay}
         playerMana={battlePlayer.mana}
         isPlayerTurn={currentTurn === "player" && gamePhase === "playing"}

@@ -46,6 +46,14 @@ export interface CardFilter {
   owned?: boolean;
 }
 
+export interface BattleCard extends Card {
+  instanceId: string;
+  currentHealth: number;
+  currentAttack: number;
+  canAttack: boolean;
+  hasAttackedThisTurn: boolean;
+}
+
 export interface BattleStats {
   wins: number;
   losses: number;

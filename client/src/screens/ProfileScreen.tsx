@@ -389,7 +389,7 @@ export default function ProfileScreen({ onNavigate }: ProfileScreenProps) {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="text-white font-bold">{achievement.name}</h3>
-                            <Badge className={rarityColors[achievement.rarity]}>
+                            <Badge className={rarityColors[achievement.rarity as keyof typeof rarityColors]}>
                               {achievement.rarity}
                             </Badge>
                           </div>
@@ -423,7 +423,7 @@ export default function ProfileScreen({ onNavigate }: ProfileScreenProps) {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="text-gray-300 font-bold">{achievement.name}</h3>
-                            <Badge className={`opacity-50 ${rarityColors[achievement.rarity]}`}>
+                            <Badge className={`opacity-50 ${rarityColors[achievement.rarity as keyof typeof rarityColors]}`}>
                               {achievement.rarity}
                             </Badge>
                           </div>

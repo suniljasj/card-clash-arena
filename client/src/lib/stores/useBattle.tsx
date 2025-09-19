@@ -1,14 +1,6 @@
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
-import { Card } from "@/types/game";
-
-interface BattleCard extends Card {
-  instanceId: string;
-  currentHealth: number;
-  currentAttack: number;
-  canAttack: boolean;
-  hasAttackedThisTurn: boolean;
-}
+import { Card, BattleCard } from "@/types/game";
 
 interface Player {
   id: string;
