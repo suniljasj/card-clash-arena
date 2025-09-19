@@ -20,6 +20,8 @@ import StoreScreen from "./screens/StoreScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import QuestsScreen from "./screens/QuestsScreen";
+import MultiplayerMatchmakingScreen from "./screens/MultiplayerMatchmakingScreen";
+import MultiplayerBattleScreen from "./screens/MultiplayerBattleScreen";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +40,9 @@ export type GameScreen =
   | "store"
   | "profile"
   | "settings"
-  | "quests";
+  | "quests"
+  | "multiplayer-matchmaking"
+  | "multiplayer-battle";
 
 function App() {
   const { user, isAuthenticated } = useAuth();
@@ -53,16 +57,13 @@ function App() {
         // Load audio files
         const backgroundMusic = new Audio("/sounds/background.mp3");
         const hitSound = new Audio("/sounds/hit.mp3");
-        const successSound = new Audio("/sounds/success.mp3");
-
-        backgroundMusic.loop = true;
-        backgroundMusic.volume = 0.3;
+        const magicSound = new Audio("/sounds/magic.mp3");
+        const victorySound = new Audio("/sounds/victory.mp3");
         
-        useAudio.getState().setBackgroundMusic(backgroundMusic);
-        useAudio.getState().setHitSound(hitSound);
-        useAudio.getState().setSuccessSound(successSound);
+        // Store references for later use
+        // You can use these in your game components
       } catch (error) {
-        console.log("Audio initialization failed:", error);
+        console.log("Audio initialization failed - this is normal on some browsers");
       }
     };
 
@@ -124,6 +125,10 @@ function App() {
         return <SettingsScreen onNavigate={navigateToScreen} />;
       case "quests":
         return <QuestsScreen onNavigate={navigateToScreen} />;
+      case "multiplayer-matchmaking":
+        return <MultiplayerMatchmakingScreen onNavigate={navigateToScreen} />;
+      case "multiplayer-battle":
+        return <MultiplayerBattleScreen onNavigate={navigateToScreen} />;
       default:
         return <DashboardScreen onNavigate={navigateToScreen} />;
     }

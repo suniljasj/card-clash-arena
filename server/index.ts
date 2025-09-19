@@ -3,6 +3,7 @@ import session from "express-session";
 import pgConnect from "connect-pg-simple";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { GameWebSocketServer } from "./websocket";
 import "./types";
 
 const app = express();
@@ -75,6 +76,9 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
+  // Initialize WebSocket server
+  const wsServer = new GameWebSocketServer(server);
+  
   // ALWAYS serve the app on port 5000
   // this serves both the API and the client
   const port = 5000;
@@ -84,5 +88,6 @@ app.use((req, res, next) => {
     reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
+    log(`WebSocket server ready at ws://localhost:${port}/ws`);
   });
 })();
