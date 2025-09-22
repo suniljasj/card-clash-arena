@@ -1,3 +1,5 @@
+import "dotenv/config";  // <-- must be the first line
+console.log("Loaded DATABASE_URL:", process.env.DATABASE_URL);
 import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
 import pgConnect from "connect-pg-simple";
